@@ -1,0 +1,63 @@
+.nav{
+  width: 500px;
+  height: 100%;
+  float: left;
+  .buildings{
+    border-radius: 15px;
+    overflow: hidden;
+    border: 2px solid #dee5ff;
+    & > .roomBlock{
+      padding: 15px 30px !important;
+    }
+    &>.title{
+      font-size: 16px;
+      font-weight: bold;
+      padding: 10px 15px;
+    }
+    .roomBlock{
+      padding: 5px 25px;
+      background: aliceblue;
+      border-bottom: 2px solid #a199f10f;
+      cursor: pointer;
+      position: relative;
+      .equipmentIcon{
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 6px;
+        left: 0px;
+      }
+      //&:hover{
+      //  color: #dae5ef;
+      //}
+      &:last-child{
+        border-bottom: none;
+      }
+      .title{
+        border-bottom: 2px dashed #dae5ef;
+        padding-bottom: 5px;
+        font-weight: 600;
+        position: relative;
+        .equipmentIcon{
+          top: 0px;
+          left: -23px;
+        }
+      }
+      .element{
+        padding: 5px 10px;
+      }
+    }
+
+    //.floor{
+    //  padding: 5px 25px;
+    //  margin-top: -1px;
+    //  background: aliceblue;
+    //  border-radius: 5px;
+
+    //  .room{
+    //    padding: 5px 10px;
+    //    border-bottom: 2px solid #a199f10f;
+    //  }
+    //}
+  }
+}

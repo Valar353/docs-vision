@@ -11,3 +11,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.root{
+  background: ghostwhite;
+}
+/*.roomBlock{*/
+/*  padding: 5px 25px;*/
+/*  margin-top: -1px;*/
+/*  background: aliceblue;*/
+/*  border-radius: 5px;*/
+/*}*/
+/*!*.roomlock{*!*/
+/*!*  border-bottom: 2px dashed #dae5ef;*!*/
+/*!*  padding-bottom: 5px;*!*/
+/*!*  font-weight: 600;*!*/
+/*!*}*!*/
+/*.buildings__title{*/
+/*  font-size: 16px;*/
+/*  font-weight: bold;*/
+/*  padding: 10px 15px;*/
+/*}*/
+/*.buildings{*/
+/*  margin: 0 15px;*/
+/*  background: #dee5ff;*/
+/*  border-radius: 5px;*/
+/*}*/
