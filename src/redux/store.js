@@ -14,7 +14,7 @@ const initialState = {
     },
     formAddEquipment: {
         name: '',
-        count: 0,
+        count: '',
         room: '',
     }
 };
