@@ -9,7 +9,6 @@ function EquipmentContainer(props) {
 }
 const mapStateToProps = function(state) {
     return {
-        equipment: state.equipment,
         outputEquipment: state.outputEquipment,
         selectEquipment: state.selectEquipment,
     }

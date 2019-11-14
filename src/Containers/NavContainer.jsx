@@ -10,7 +10,6 @@ function NavContainer(props) {
 const mapStateToProps = function(state) {
     return {
         outputBuildings: state.outputBuildings,
-        equipment: state.equipment,
     }
 };
 

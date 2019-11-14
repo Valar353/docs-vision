@@ -19,25 +19,24 @@ export default class Equipment extends React.Component {
             </div>
         )
     }
+
     createTitle = (selectBlock) => {
-        if(typeof selectBlock.id !== 'undefined'){
+        if (typeof selectBlock.id !== 'undefined') {
             const breadcrumbs = createBreadcrumbs(selectBlock.block);
             return <div className={style.equipmentTitle}>{breadcrumbs} </div>
-        }else{
+        } else {
             return <div className={style.equipmentTitle}>Выберите узел здания</div>
         }
+
         function createBreadcrumbs(selectBlock) {
-            if(typeof selectBlock.parent === 'undefined'){
+            if (typeof selectBlock.parent === 'undefined') {
                 return selectBlock.name
-            }else{
-                return  createBreadcrumbs(selectBlock.parent)+ '/' + selectBlock.name;
+            } else {
+                return createBreadcrumbs(selectBlock.parent) + '/' + selectBlock.name;
             }
-
-
         }
     };
     createEquipment = (equipment, selectEquipment) => {
-        // console.log(equipment, selectEquipment)
         const {isRoom, id, block} = selectEquipment;
         if (Object.keys(equipment).length === 0 || typeof id === 'undefined') {
             return <div/>
@@ -51,34 +50,35 @@ export default class Equipment extends React.Component {
                             {item.name}: <strong>{item.count}</strong>
                         </div>
                         <div className={style.buttons}>
-                            <div className={style.btn} onClick={() => this.changeEquipment(item.id, item.name, item.count)}>Добавить</div>
+                            <div className={style.btn}
+                                 onClick={() => this.changeEquipment(item.id, item.name, item.count)}>Добавить
+                            </div>
                             <div className={style.btn} onClick={() => this.removeEquipment(item.id)}>Удалить</div>
                         </div>
                     </div>
                 });
                 return <>
                     <div className={style.equipmentList}>
-                        <div className={style.wrapperForm}><AddEquipmentContainer /></div>
+                        <div className={style.wrapperForm}><AddEquipmentContainer/></div>
                         {items}
                     </div>
 
                 </>
             } else {
                 return createBlock([block]);
-
             }
+
             function createBlock(bl) {
-                return bl.map(block=>{
-                    if(typeof block.children !== 'undefined'){
+                return bl.map(block => {
+                    if (typeof block.children !== 'undefined') {
                         const children = createBlock(block.children);
                         const equipment = createItem(block);
-                        // console.log(equipment)
                         return <div key={block.id} className={style.buildBlock}>
                             <div className={style.blockTitle}>{block.name}</div>
                             <div>{equipment}</div>
                             <div>{children}</div>
                         </div>;
-                    }else{
+                    } else {
                         const equipment = createItem(block, false);
                         return <div key={block.id} className={style.buildBlock}>
                             <div className={style.blockTitle}>{block.name}</div>
@@ -87,34 +87,29 @@ export default class Equipment extends React.Component {
                     }
                 });
             }
+
             function createItem(block, children = true) {
                 const arr = equipment.map(item => {
-                    if(block.id === item.room && item.count > 0){
-                        // console.log(item);
+                    if (block.id === item.room && item.count > 0) {
                         return (
                             <div key={item.id} className={style.item}>
                                 <div className={style.name}>Наименование: {item.name}</div>
                                 <div>Количество: {item.count}</div>
                             </div>
                         );
-                    }else{
-                        // return <div key={item.id} className={style.item}>
-                        //     Оборудование отсутствует
-                        // </div>
+                    } else {
                         return false;
                     }
                 });
-                if(!children){
-                    if(arr.every(item=>!item)){
+                if (!children) {
+                    if (arr.every(item => !item)) {
                         return <div>Оборудование отсутствует</div>
-                    }else{
-                        return <>{arr}</>
+                    } else {
+                        return arr
                     }
-                }else{
-                    return <>{arr}</>
+                } else {
+                    return arr
                 }
-
-
             }
         }
     };
@@ -126,17 +121,14 @@ export default class Equipment extends React.Component {
                 store.dispatch(updateScorocode());
             });
         });
-
     };
-    changeEquipment = (id, name, count) => {
 
-        // let equip = this.props.state.equipment;
+    changeEquipment = (id, name, count) => {
         let equip = new Scorocode.Object("equipment");
         equip.set("_id", id).set("name", name).set("count", ++count);
         equip.save().then(() => {
             store.dispatch(updateScorocode());
         });
-
     };
 
 }

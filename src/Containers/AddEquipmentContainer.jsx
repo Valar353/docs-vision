@@ -10,7 +10,6 @@ function AddEquipmentContainer(props) {
 const mapStateToProps = function(state) {
     return {
         formAddEquipment: state.formAddEquipment,
-        equipment: state.equipment,
     }
 };
 

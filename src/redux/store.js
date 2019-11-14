@@ -3,8 +3,6 @@ import userReducer from "./reducer";
 import thunk from 'redux-thunk';
 
 const initialState = {
-    buildings: {},
-    equipment: {},
     outputBuildings: {},
     outputEquipment: {},
     selectEquipment: {

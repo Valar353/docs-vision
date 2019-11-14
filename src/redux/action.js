@@ -9,26 +9,21 @@ import {
 } from "./constant";
 import Scorocode from "../lib/scorocode";
 
-export function actionInitApp(buildings, equipment) {
-    return {
-        type: INIT_APP,
-        buildings,
-        equipment
-    }
-}
 export function actionUpdateBuildings(outputBuildings) {
     return {
         type: UPDATE_OUTPUT_BUILDING,
         outputBuildings
     }
 }
+
 export function actionUpdateEquipment(outputEquipment) {
     return {
         type: UPDATE_OUTPUT_EQUIPMENT,
         outputEquipment
     }
 }
-export function actionSelectEquipment(id, isRoom = true, block ={}) {
+
+export function actionSelectEquipment(id, isRoom = true, block = {}) {
     return {
         type: SELECT_EQUIPMENT,
         id,
@@ -36,29 +31,29 @@ export function actionSelectEquipment(id, isRoom = true, block ={}) {
         block
     }
 }
+
 export function actionChangeFormName(name) {
     return {
         type: CHANGE_FORM_NAME,
         name,
     }
 }
+
 export function actionChangeFormCount(count) {
     return {
         type: CHANGE_FORM_COUNT,
         count,
     }
 }
+
 export const updateScorocode = () => {
     const updateHierarchy = async (buildings, eq) => {
         const init = (buildings) => {
-            // console.log(buildings)
             return buildings.find().then((finded) => {
                 let buildings = finded.result;
                 return buildings.map((build) => {
-                    // console.log(build)
-                    let fl = createRoomBlock(build.rooms, build);
-                    // console.info(fl)
-                    return {id: build._id, name: build.name, children: fl, isEmpty: true}
+                    let ch = createRoomBlock(build.rooms, build);
+                    return {id: build._id, name: build.name, children: ch, isEmpty: true}
                 });
             });
 
@@ -73,15 +68,16 @@ export const updateScorocode = () => {
                         return {id: bl.id, parent: par, name: bl.name, isEmpty: true}
                     }
                 });
+
                 function searchParent(block, parent) {
                     let par = [];
-                    if(typeof parent.length !== 'undefined'){
+                    if (typeof parent.length !== 'undefined') {
                         par = parent.find(p => {
                             return p.children.find(ch => {
-                                if(block.id === ch.id) return true;
+                                if (block.id === ch.id) return true;
                             })
                         })
-                    }else{
+                    } else {
                         par = parent
                     }
                     return par;
@@ -90,27 +86,23 @@ export const updateScorocode = () => {
         };
 
         let per = await init(buildings);
-        // console.log(per)
-
         per = await checkEquipment(per, eq);
-        // console.log(per)
+
         await store.dispatch(actionUpdateBuildings(per));
     };
     const checkEquipment = (block, eq) => {
         const check = (bl, eq) => {
-            let cos = searchPar(bl);
-            // console.log(cos);
-            return cos;
+            return searchPar(bl);
+
             function searchPar(block, e = true) {
-                // console.log(block)
-                return block.map(child=>{
-                    if(typeof child.children === 'undefined'){
-                        let ll = eq.filter(item=> child.id === item.room && item.count > 0);
-                        if(ll.length > 0){
+                return block.map(child => {
+                    if (typeof child.children === 'undefined') {
+                        let ll = eq.filter(item => child.id === item.room && item.count > 0);
+                        if (ll.length > 0) {
                             child.isEmpty = false;
                         }
-                        return {ch:child, emp: false}
-                    }else{
+                        return {ch: child, emp: false}
+                    } else {
                         const arr = searchPar(child.children);
                         let childArr = [];
                         let isEmpty = [];
@@ -119,30 +111,19 @@ export const updateScorocode = () => {
                             isEmpty.push(it.emp);
                         });
                         let g = isEmpty.some(b => b);
-                        if(typeof g === 'undefined'){
+                        if (typeof g === 'undefined') {
                             child.isEmpty = false;
-
-                        }else{
-                            // console.log(g, child)
-
-                            if(!g){
+                        } else {
+                            if (!g) {
                                 child.isEmpty = false;
-                            }else{
-
+                            } else {
                                 child.isEmpty = true;
-
                             }
-
-
                         }
-                        if(typeof childArr[0] === 'undefined'){
-                            // console.log(childArr, isEmpty, child)
-                            return {...child, children: child.children }
+                        if (typeof childArr[0] === 'undefined') {
+                            return {...child, children: child.children}
                         }
-
-
-                        // if(!emp)child.isEmpty = false;
-                        return {...child, children: childArr }
+                        return {...child, children: childArr}
                     }
                 })
             }
@@ -152,8 +133,6 @@ export const updateScorocode = () => {
     const updateEquipment = (equipment) => {
         return equipment.find().then((found) => {
             let equipment = found.result;
-            // console.info(equipment);
-
             return equipment.map(item => {
                 return {id: item._id, name: item.name, count: item.count, room: item.room}
             });
@@ -163,10 +142,10 @@ export const updateScorocode = () => {
                 return value;
             });
     };
-    return async dispatch =>{
+    return async () => {
         const buildings = new Scorocode.Query("buildings");
         const equipment = new Scorocode.Query("equipment");
-        const eq = await updateEquipment(equipment)
+        const eq = await updateEquipment(equipment);
         await updateHierarchy(buildings, eq);
     }
 

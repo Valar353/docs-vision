@@ -1,4 +1,4 @@
-.equipment{
+.equipment {
   width: 100%;
   height: 100%;
   float: left;
@@ -9,7 +9,8 @@
   background: aliceblue;
   margin-left: 10px;
   border-radius: 10px;
-  .equipmentTitle{
+
+  .equipmentTitle {
     width: 100%;
     padding: 10px 20px;
     background: #1789ff52;
@@ -21,15 +22,18 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
-  .equipmentList{
+
+  .equipmentList {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    .wrapperForm{
+
+    .wrapperForm {
       width: 100%;
       margin: 15px;
-      .addForm{
+
+      .addForm {
         background: #d7e9fb;
         border-radius: 5px;
         width: 300px;
@@ -37,22 +41,26 @@
         margin: auto;
         display: flex;
         flex-direction: column;
-        .title{
+
+        .title {
           font-weight: 500;
           padding: 10px 0;
         }
-        label{
+
+        label {
           padding: 10px 0;
           display: flex;
           justify-content: space-between;
-          input{
+
+          input {
             border: 0;
             padding: 5px;
             border-radius: 2px;
             margin-left: 10px;
           }
         }
-        button{
+
+        button {
           padding: 8px;
           border: none;
           font-weight: 600;
@@ -63,16 +71,15 @@
           margin-top: 10px;
           transition: .2s;
 
-          &:hover{
+          &:hover {
             background: #03bd50;
           }
         }
       }
     }
 
-    .item{
+    .item {
       padding: 10px;
-      //background: #f1f7fd;
       border: 1px solid #1789ff52;
       margin: 5px;
       max-width: 200px;
@@ -80,13 +87,14 @@
       display: flex;
       flex-wrap: wrap;
       align-items: flex-end;
-      //font-weight: normal;
-      .buttons{
+
+      .buttons {
         display: flex;
         justify-content: space-evenly;
         width: 100%;
         margin-top: 8px;
-        .btn{
+
+        .btn {
           cursor: pointer;
           background: #03d657;
           padding: 6px;
@@ -96,28 +104,33 @@
           border: 1px solid #6cb9612e;
           transition: .2s;
           user-select: none;
-          &:hover{
+
+          &:hover {
             background: #03bd50;
           }
         }
       }
 
-      .name{
+      .name {
         word-break: break-word;
-        .count{
+
+        .count {
           font-weight: 600;
         }
       }
 
     }
-    .buildBlock{
+
+    .buildBlock {
       padding: 5px 20px;
-      .blockTitle{
+
+      .blockTitle {
         font-weight: 500;
         border-bottom: 1px dashed #72ff8a8c;
         padding-bottom: 4px;
       }
-      .blockEquipmentList{
+
+      .blockEquipmentList {
         padding-left: 10px;
       }
     }
